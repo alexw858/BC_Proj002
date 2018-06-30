@@ -1,0 +1,185 @@
+state,incidentType,ProjectAmount
+Alabama,Hurricane,382
+Alabama,Severe Storm(s),6686
+Alaska,Coastal Storm,7
+Alaska,Flood,436
+Alaska,Severe Storm(s),347
+American Samoa,Earthquake,182
+American Samoa,Hurricane,3
+American Samoa,Severe Storm(s),18
+Arizona,Flood,102
+Arizona,Freezing,7
+Arizona,Severe Storm(s),386
+Arkansas,Hurricane,436
+Arkansas,Severe Ice Storm,194
+Arkansas,Severe Storm(s),15822
+Arkansas,Tornado,140
+California,Earthquake,471
+California,Fire,659
+California,Flood,3082
+California,Severe Storm(s),1396
+California,Tsunami,83
+Colorado,Fire,57
+Colorado,Flood,1362
+Connecticut,Hurricane,2117
+Connecticut,Severe Storm(s),1729
+Connecticut,Snow,332
+Delaware,Hurricane,327
+Delaware,Snow,383
+District of Columbia,Earthquake,119
+District of Columbia,Hurricane,90
+District of Columbia,Other,32
+District of Columbia,Severe Storm(s),102
+District of Columbia,Snow,112
+Florida,Hurricane,2171
+Florida,Severe Storm(s),5981
+Georgia,Hurricane,2011
+Georgia,Severe Ice Storm,407
+Georgia,Severe Storm(s),4088
+Georgia,Tornado,164
+Guam,Severe Storm(s),18
+Guam,Typhoon,47
+Hawaii,Flood,55
+Hawaii,Mud/Landslide,16
+Hawaii,Severe Storm(s),184
+Hawaii,Tsunami,69
+Hawaii,Volcano,21
+Idaho,Flood,393
+Idaho,Severe Storm(s),139
+Illinois,Flood,1257
+Illinois,Severe Storm(s),4189
+Illinois,Snow,2431
+Indiana,Severe Storm(s),4851
+Iowa,Flood,1627
+Iowa,Severe Ice Storm,755
+Iowa,Severe Storm(s),15295
+Kansas,Flood,104
+Kansas,Severe Ice Storm,134
+Kansas,Severe Storm(s),6468
+Kansas,Snow,339
+Kentucky,Flood,694
+Kentucky,Severe Ice Storm,2258
+Kentucky,Severe Storm(s),8532
+Kentucky,Snow,237
+Louisiana,Coastal Storm,87
+Louisiana,Flood,2351
+Louisiana,Hurricane,9746
+Louisiana,Severe Storm(s),427
+Maine,Flood,526
+Maine,Hurricane,238
+Maine,Severe Storm(s),1939
+Maine,Snow,99
+Maryland,Flood,384
+Maryland,Hurricane,1671
+Maryland,Severe Storm(s),215
+Maryland,Snow,2026
+Massachusetts,Hurricane,1624
+Massachusetts,Severe Ice Storm,1001
+Massachusetts,Severe Storm(s),4026
+Massachusetts,Snow,453
+Massachusetts,Terrorist,51
+Massachusetts,Tornado,258
+Michigan,Flood,522
+Michigan,Severe Storm(s),336
+Minnesota,Flood,3318
+Minnesota,Severe Storm(s),6315
+Minnesota,Tornado,488
+Mississippi,Flood,542
+Mississippi,Hurricane,1238
+Mississippi,Severe Storm(s),1859
+Mississippi,Tornado,69
+Missouri,Flood,2131
+Missouri,Severe Ice Storm,937
+Missouri,Severe Storm(s),11306
+Montana,Fire,14
+Montana,Flood,146
+Montana,Severe Storm(s),1867
+Montana,Tornado,12
+Nebraska,Flood,832
+Nebraska,Severe Ice Storm,93
+Nebraska,Severe Storm(s),3808
+Nebraska,Tornado,46
+Nevada,Flood,23
+Nevada,Severe Storm(s),267
+New Hampshire,Flood,73
+New Hampshire,Hurricane,722
+New Hampshire,Severe Ice Storm,551
+New Hampshire,Severe Storm(s),1588
+New Jersey,Hurricane,9703
+New Jersey,Severe Storm(s),4354
+New Jersey,Snow,2123
+New Mexico,Flood,1692
+New Mexico,Severe Storm(s),658
+New York,Flood,2506
+New York,Hurricane,13237
+New York,Severe Storm(s),8455
+New York,Snow,1052
+New York,Tornado,166
+North Carolina,Flood,267
+North Carolina,Hurricane,3693
+North Carolina,Mud/Landslide,68
+North Carolina,Severe Ice Storm,139
+North Carolina,Severe Storm(s),818
+North Dakota,Flood,6417
+North Dakota,Severe Storm(s),6152
+Northern Mariana Islands,Typhoon,95
+Ohio,Hurricane,162
+Ohio,Severe Storm(s),4004
+Ohio,Snow,489
+Oklahoma,Flood,967
+Oklahoma,Severe Ice Storm,2342
+Oklahoma,Severe Storm(s),6458
+Oklahoma,Snow,19
+Oklahoma,Tornado,765
+Oregon,Flood,521
+Oregon,Severe Storm(s),1876
+Oregon,Tsunami,28
+Pennsylvania,Flood,5622
+Pennsylvania,Hurricane,2022
+Pennsylvania,Severe Storm(s),912
+Pennsylvania,Snow,3304
+Puerto Rico,Fire,69
+Puerto Rico,Hurricane,2387
+Puerto Rico,Severe Storm(s),2264
+Rhode Island,Hurricane,503
+Rhode Island,Severe Storm(s),1126
+South Carolina,Flood,1016
+South Carolina,Hurricane,1049
+South Carolina,Severe Ice Storm,447
+South Dakota,Flood,4979
+South Dakota,Severe Storm(s),3280
+South Dakota,Snow,91
+Tennessee,Fire,37
+Tennessee,Severe Ice Storm,409
+Tennessee,Severe Storm(s),8706
+Texas,Fire,1392
+Texas,Flood,1548
+Texas,Hurricane,17803
+Texas,Other,60
+Texas,Severe Storm(s),3009
+Utah,Flood,555
+Utah,Severe Storm(s),80
+Vermont,Flood,409
+Vermont,Hurricane,3272
+Vermont,Severe Ice Storm,101
+Vermont,Severe Storm(s),1768
+Virgin Islands of the U.S.,Hurricane,588
+Virgin Islands of the U.S.,Severe Storm(s),142
+Virginia,Earthquake,76
+Virginia,Hurricane,1575
+Virginia,Severe Storm(s),1083
+Virginia,Snow,1174
+Washington,Fire,195
+Washington,Flood,2273
+Washington,Mud/Landslide,39
+Washington,Severe Storm(s),3818
+West Virginia,Chemical,54
+West Virginia,Flood,1528
+West Virginia,Hurricane,291
+West Virginia,Severe Storm(s),3793
+West Virginia,Snow,336
+Wisconsin,Flood,238
+Wisconsin,Severe Storm(s),4770
+Wisconsin,Snow,943
+Wyoming,Flood,152
+Wyoming,Severe Storm(s),222
