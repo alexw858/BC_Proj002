@@ -53,7 +53,7 @@ var getFill = function(state, feat){
 var getText = function(state, feat){
   for(var i=0; i<state.length; i++){
     if(feat.properties.NAME == state[i].state){
-      return ("<h1>"+state[i].state+"</h1><hr><h3> Percentage funded by FEMA: " + state[i].PercentFunded + "<h3>")
+      return ("<h2>"+state[i].state+"</h2><hr><h3> Percentage funded by FEMA: </h3><h2>" + Math.round(state[i].PercentFunded * 100) + "% </h2>")
     }
   }
 }
@@ -65,11 +65,6 @@ d3.json(stateLink, function(stateData) {
   //making a callback within a callback to get the state funded data
   d3.csv(csvPath, function(fundingData) {
     // console.log("funding data = ", fundingData);
-    // var myPercentages = [];
-    // for (var i = 0; i < fundingData.length; i++) {
-    //   myPercentages.push(fundingData[i].PercentFunded);
-    //   }
-    // console.log("myPercentages = ", myPercentages);
 
     // Creating a geoJSON layer with the retrieved data
     var stateBorders = L.geoJson(stateData, {
@@ -102,12 +97,7 @@ d3.json(stateLink, function(stateData) {
             });
           }
         });
-        // I need to loop through fundingData to gather the percentages for the pop-up, but the loop isn't working here
-      
-        // layer.bindPopup("<h3>" + feature.properties.NAME + "</h3><br><p> Percentage Funded by FEMA: " + myPercentages);
-        // for (var i=0; i < fundingData.length; i++) {
-        //   console.log(fundingData[i].PercentFunded);
-        //   }
+        // I need to loop through fundingData to gather the percentages for the pop-up, created function getText to gather the percentages
         layer.bindPopup(getText(fundingData, feature));
       }
         
