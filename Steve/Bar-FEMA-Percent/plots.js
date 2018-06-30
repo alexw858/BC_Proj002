@@ -62,7 +62,7 @@ Plotly.d3.csv("incident_funded.csv", function(error, response) {
   var data = [trace1];
 
   var layout = {
-    title: "FEMA % Funded for Each Disaster Type",
+    title: "FEMA % Funded for Each Disaster Type (2008-2018)",
     xaxis: {
       title: "Disaster Type"
     },
