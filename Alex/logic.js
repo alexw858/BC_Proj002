@@ -18,47 +18,92 @@ var stateLink = "http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_0
 var weatherLink = "https://api.weather.gov/alerts/active"
 var csvPath = "data/state_funded.csv"
 
+// function to color state based on percent funded
+var getFill = function(state, feat){
+  console.log(feat.properties.NAME)
+  for(var i=0; i<state.length; i++){
+    if(feat.properties.NAME == state[i].state){
+      // console.log(state[i].PercentFunded)
+      console.log(Math.round(state[i].PercentFunded * 100) / 100)
+      if (Math.round(state[i].PercentFunded * 100) / 100 > 0.95) {
+        return "DarkGreen";
+      }
+      else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.90) {
+        return "green";
+      }
+      else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.85) {
+        return "GreenYellow";
+      }
+      else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.80) {
+        return "yellow";
+      }
+      else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.75) {
+        return "GoldenRod";
+      }
+      else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.70) {
+        return "orange";
+      }
+      else {
+        return "red";
+      }
+    }
+  }
+}
+
 
 // Grabbing GeoJSON data for state borders
 d3.json(stateLink, function(stateData) {
   console.log("state data = ", stateData);
   //making a callback within a callback to get the state funded data
   d3.csv(csvPath, function(fundingData) {
-    var funding = L.csv
-  
+    // console.log("funding data = ", fundingData);
+    // var myPercentages = [];
+    // for (var i = 0; i < fundingData.length; i++) {
+    //   myPercentages.push(fundingData[i].PercentFunded);
+    //   }
+    // console.log("myPercentages = ", myPercentages);
+
     // Creating a geoJSON layer with the retrieved data
     var stateBorders = L.geoJson(stateData, {
-      // Style each feature (in this case a neighborhood)
+      // Style each feature
       style: function(feature) {
         return {
           color: "white",
-          fillOpacity: 0.5,
-          weight: 1.5
+          fillOpacity: 0.3,
+          weight: 1.5,
+          fillColor: getFill(fundingData,feature)
         };
       },
         // Called on each feature
-      onEachFeature: function(feature, layer) {
+      onEachFeature: function(feature, layer, fundingData) {
+        console.log("funding data = ", fundingData);
           // Set mouse events to change map styling
         layer.on({
-            // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 90% so that it stands out
+            // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 50% so that it stands out
           mouseover: function(event) {
-            layer = event.target;
-            layer.setStyle({
-              fillOpacity: 0.9
-            });
-          },
-            // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back to 50%
-          mouseout: function(event) {
             layer = event.target;
             layer.setStyle({
               fillOpacity: 0.5
             });
+          },
+            // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back to 30%
+          mouseout: function(event) {
+            layer = event.target;
+            layer.setStyle({
+              fillOpacity: 0.3
+            });
           }
         });
-        layer.bindPopup("<h3>" + feature.properties.NAME + "</h3>");
+        // I need to loop through fundingData to gather the percentages for the pop-up, but the loop isn't working here
+      
+        // layer.bindPopup("<h3>" + feature.properties.NAME + "</h3><br><p> Percentage Funded by FEMA: " + myPercentages);
+        // for (var i=0; i < fundingData.length; i++) {
+        //   console.log(fundingData[i].PercentFunded);
+        //   }
+        layer.bindPopup("<h3>" + feature.properties.NAME + "</h3><br><p> Percentage Funded by FEMA: ");
       }
+        
     })
-  })
   stateBorders.addTo(map);
 
   // add next d3.json call to the active weather api
@@ -82,7 +127,7 @@ d3.json(stateLink, function(stateData) {
       style: function(feature) {
         return {
           color: severityColor(feature.properties.severity),
-          fillOpacity: 0.5,
+          fillOpacity: 0.6,
           weight: 1.5
         };
       },
@@ -124,4 +169,5 @@ d3.json(stateLink, function(stateData) {
       collapsed: false
     }).addTo(map);
   })
+})
 });
