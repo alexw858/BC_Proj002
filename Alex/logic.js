@@ -38,14 +38,22 @@ var getFill = function(state, feat){
         return "yellow";
       }
       else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.75) {
-        return "GoldenRod";
+        return "orange";
       }
       else if (Math.round(state[i].PercentFunded * 100) / 100 > 0.70) {
-        return "orange";
+        return "OrangeRed";
       }
       else {
         return "red";
       }
+    }
+  }
+}
+
+var getText = function(state, feat){
+  for(var i=0; i<state.length; i++){
+    if(feat.properties.NAME == state[i].state){
+      return ("<h1>"+state[i].state+"</h1><hr><h3> Percentage funded by FEMA: " + state[i].PercentFunded + "<h3>")
     }
   }
 }
@@ -75,8 +83,8 @@ d3.json(stateLink, function(stateData) {
         };
       },
         // Called on each feature
-      onEachFeature: function(feature, layer, fundingData) {
-        console.log("funding data = ", fundingData);
+      onEachFeature: function(feature, layer) {
+        // console.log("funding data = ", fundingData);
           // Set mouse events to change map styling
         layer.on({
             // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 50% so that it stands out
@@ -100,7 +108,7 @@ d3.json(stateLink, function(stateData) {
         // for (var i=0; i < fundingData.length; i++) {
         //   console.log(fundingData[i].PercentFunded);
         //   }
-        layer.bindPopup("<h3>" + feature.properties.NAME + "</h3><br><p> Percentage Funded by FEMA: ");
+        layer.bindPopup(getText(fundingData, feature));
       }
         
     })
