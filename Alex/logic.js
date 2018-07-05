@@ -20,11 +20,12 @@ var csvPath = "data/state_funded.csv"
 
 // function to color state based on percent funded
 var getFill1 = function(state, feat){
-  console.log(feat.properties.NAME)
+  // console.log(feat.properties.NAME)
   for(var i=0; i<state.length; i++){
     if(feat.properties.NAME == state[i].state){
-      // console.log(state[i].PercentFunded)
-      console.log(Math.round(state[i].PercentFunded * 100) / 100)
+      // console.log("state[i].PercentFunded not rounded = ", state[i].PercentFunded);
+      // console.log("PercentFunded rounded with *100 and /100 = ", Math.round(state[i].PercentFunded * 100) / 100);
+      // console.log("PercentFunded rounded without * and / = ", Math.round(state[i].PercentFunded));
       if (Math.round(state[i].PercentFunded * 100) / 100 > 95) {
         return "DarkGreen";
       }
@@ -50,11 +51,11 @@ var getFill1 = function(state, feat){
   }
 }
 var getFill2 = function(state, feat){
-  console.log(feat.properties.NAME)
+  // console.log(feat.properties.NAME)
   for(var i=0; i<state.length; i++){
     if(feat.properties.NAME == state[i].state){
-      // console.log(state[i].PercentFunded)
-      console.log(Math.round(state[i].PercentOfTotalFunding * 100) / 100)
+      // console.log("PercentOfTotalFunding not rounded = ", state[i].PercentOfTotalFunding);
+      // console.log("PercentOfTotalFunding with *100 and /100 = ", Math.round(state[i].PercentOfTotalFunding * 100) / 100);
       if (Math.round(state[i].PercentOfTotalFunding * 100) / 100 > 35) {
         return "Lime";
       }
@@ -139,6 +140,39 @@ d3.json(stateLink, function(stateData) {
     })
   percentFunded.addTo(map);
 
+  // adding legend here for project % funded layer
+  var legend1 = L.control({ position: "bottomright"});
+  legend1.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    // array listing out values that divide color categories (changed to ascending order)
+    var limits = ["<70", 70, 75, 80, 85, 90, "95+"];
+    var colors = ["red", "OrangeRed", "orange", "yellow", "GreenYellow", "green", "DarkGreen"];
+    var labels = [];
+
+    // StackOverflow method: 
+    // for (var i=0; i < fundingData.length; i++) {
+    //   div.innerHTML += 
+    //     '<i style="background:' + getFill1(limits[i] + 1) + '"></i> ' +
+    //     limits[i] + (limits[i + 1] ? '&ndash;' + limits[i + 1] + '<br>' : '+');
+    // }
+
+    // add min and max
+    var legend1Info = "<h1>Percent Funded</h1>" +
+      "<div class=\"labels\">" +
+        "<div class=\"min\">" + limits[0] + "</div>" +
+        "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+      "</div>";
+    div.innerHTML = legend1Info;
+
+    limits.forEach(function(limit, index) {
+      labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+    });
+
+    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    return div;
+  }
+  legend1.addTo(map);
+
   // Add variable for state layer that colors based on percentage of total funding each state gets
   var percentTotal = L.geoJson(stateData, {
     // Style each feature
@@ -174,6 +208,32 @@ d3.json(stateLink, function(stateData) {
     }      
   })
   // not adding percentTotal to map because I don't want it displayed by default
+  // add legend for percentTotal Layer here:
+  // adding legend here for project % funded layer
+  var legend2 = L.control({ position: "bottomright"});
+  legend2.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    // array listing out values that divide color categories (changed to ascending order)
+    var limits = [0, 1, 2, 3, 4, 5, 9, 35];
+    var colors = ["red", "OrangeRed", "Tomato", "orange", "yellow", "GreenYellow", "LawnGreen", "Lime"];
+    var labels = [];
+
+    // add min and max
+    var legend2Info = "<h1>Percent of Total Funding</h1>" +
+      "<div class=\"labels\">" +
+        "<div class=\"min\">" + limits[0] + "</div>" +
+        "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+      "</div>";
+    div.innerHTML = legend2Info;
+
+    limits.forEach(function(limit, index) {
+      labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+    });
+
+    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    return div;
+  }
+  // legend2.addTo(map);
 
   // add next d3.json call to the active weather api
     d3.json(weatherLink, function(weatherData) {
@@ -237,5 +297,27 @@ d3.json(stateLink, function(stateData) {
         collapsed: false
       }).addTo(map);
     })
+    // trying to add event listener here
+    map.on('overlayadd', function (eventLayer) {
+      console.log("eventLayer = ", eventLayer);
+      if (eventLayer.name === 'Percent Funded') {
+        map.removeControl(legend2);
+        legend1.addTo(map);
+      }
+      else if  (eventLayer.name === 'Percent of Total Funding') {
+        map.removeControl(legend1);
+        legend2.addTo(map);
+      }
+    })
+    map.on('overlayremove', function(eventLayer) {
+      if (eventLayer.name === 'Percent Funded') {
+        map.removeControl(legend1);
+      }
+      else if  (eventLayer.name === 'Percent of Total Funding') {
+        map.removeControl(legend2);
+      }
+    })
   })
 });
+
+// adding conditional to change map legend on layer change
