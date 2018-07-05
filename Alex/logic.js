@@ -208,8 +208,8 @@ d3.json(stateLink, function(stateData) {
     }      
   })
   // not adding percentTotal to map because I don't want it displayed by default
-  // add legend for percentTotal Layer here:
-  // adding legend here for project % funded layer
+
+  // add legend for percentTotal Layer
   var legend2 = L.control({ position: "bottomright"});
   legend2.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
@@ -233,7 +233,7 @@ d3.json(stateLink, function(stateData) {
     div.innerHTML += "<ul>" + labels.join("") + "</ul>";
     return div;
   }
-  // legend2.addTo(map);
+  // not adding legend2 to map by default
 
   // add next d3.json call to the active weather api
     d3.json(weatherLink, function(weatherData) {
@@ -285,39 +285,58 @@ d3.json(stateLink, function(stateData) {
       weatherEvents.addTo(map);
 
       var baseMaps = {
-          "Street Map": streetMap
+          // "Street Map": streetMap, 
+          "Percent Funded": percentFunded, 
+          "Percent of Total Funding": percentTotal
       };
       var overlayMaps = {
-          "Percent Funded": percentFunded, 
-          "Percent of Total Funding": percentTotal, 
+          // "Percent Funded": percentFunded, 
+          // "Percent of Total Funding": percentTotal, 
           "Active Weather Alerts": weatherEvents
       };
 
       L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
       }).addTo(map);
+
+      map.on('baselayerchange', function (eventLayer) {
+        console.log("eventLayer = ", eventLayer);
+        if (eventLayer.name === 'Percent Funded') {
+          map.removeControl(legend2);
+          legend1.addTo(map);
+          // map.removeControl(percentTotal);
+          // map.removeLayer(percentTotal);
+          weatherEvents.bringToFront();
+        }
+        else if  (eventLayer.name === 'Percent of Total Funding') {
+          map.removeControl(legend1);
+          legend2.addTo(map);
+          // map.removeControl(percentFunded);
+          // map.removeLayer(percentFunded);
+          weatherEvents.bringToFront();
+        }
+      });
     })
-    // trying to add event listener here
-    map.on('overlayadd', function (eventLayer) {
-      console.log("eventLayer = ", eventLayer);
-      if (eventLayer.name === 'Percent Funded') {
-        map.removeControl(legend2);
-        legend1.addTo(map);
-      }
-      else if  (eventLayer.name === 'Percent of Total Funding') {
-        map.removeControl(legend1);
-        legend2.addTo(map);
-      }
-    })
-    map.on('overlayremove', function(eventLayer) {
-      if (eventLayer.name === 'Percent Funded') {
-        map.removeControl(legend1);
-      }
-      else if  (eventLayer.name === 'Percent of Total Funding') {
-        map.removeControl(legend2);
-      }
-    })
+
+  //     L.control.layers(baseMaps).addTo(map);
+  //     L.control.layers(overlayMaps).addTo(map);
+  // })
+    // adding conditional to change map legend on layer change
+    // activates when map layer is selected
+    // map.on('overlayadd', function (eventLayer) {
+
+    // map.on('layeradd', function(eventLayer) {
+    //   weatherEvents.bringToFront();
+    // });
+
+    // activates when map layer is de-selected
+    // map.on('overlayremove', function(eventLayer) {
+    //   if (eventLayer.name === 'Percent Funded') {
+    //     map.removeControl(legend1);
+    //   }
+    //   else if  (eventLayer.name === 'Percent of Total Funding') {
+    //     map.removeControl(legend2);
+    //   }
+    // })
   })
 });
-
-// adding conditional to change map legend on layer change
