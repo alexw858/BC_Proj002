@@ -190,6 +190,9 @@ d3.json(stateLink, function(stateData) {
     return div;
   }
   legend1.addTo(map);
+
+// JACOB: BEGINNING OF HOVER EVENT SECTION
+
   // getElementById only works after legend is added to map
   var e = document.getElementById("legendColors");
   // e.innerHTML += "<div id=\"popup\" style=\"display: none\">number</div>";
@@ -213,7 +216,7 @@ d3.json(stateLink, function(stateData) {
     
   // })
 
-
+// END OF HOVER EVENT SECTION
 
 
   // Add variable for state layer that colors based on percentage of total funding each state gets
