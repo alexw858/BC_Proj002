@@ -144,6 +144,7 @@ d3.json(stateLink, function(stateData) {
   var legend1 = L.control({ position: "bottomright"});
   legend1.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
+    
     // array listing out values that divide color categories (changed to ascending order)
     var limits = ["<70", 70, 75, 80, 85, 90, "95+"];
     var colors = ["red", "OrangeRed", "orange", "yellow", "GreenYellow", "green", "DarkGreen"];
@@ -165,13 +166,55 @@ d3.json(stateLink, function(stateData) {
     div.innerHTML = legend1Info;
 
     limits.forEach(function(limit, index) {
+      // creating html for each color in colors array
       labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
-    });
+      // I want my popups to populate with the values inside of limit
+      console.log("limit = ", limit);
 
-    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+      // var popupBlank = "<div id=\"popup\" style=\"display: none\">number</div>"
+      // labels.addEventListener("mouseover", function (event) {
+      //   div.innerHTML = hover;
+      // })
+
+      // var e = document.getElementById('labels');
+      // console.log(e);
+      // e.onmouseover = function() {
+      //   hover.style.display = 'block';
+      // }
+    });
+    // adds html created for colors to the page's legend
+    div.innerHTML += "<ul id=\"legendColors\">" + labels.join("") + "</ul>";
+
+    // jacob says add class to legend using D3
+
     return div;
   }
   legend1.addTo(map);
+  // getElementById only works after legend is added to map
+  var e = document.getElementById("legendColors");
+  // e.innerHTML += "<div id=\"popup\" style=\"display: none\">number</div>";
+  
+  // console.log(e.querySelectorAll("li"));
+  e.querySelectorAll("li").forEach(function(currentValue, currentIndex, listObj) {
+    console.log("currentValue = ", currentValue);
+    console.log("currentIndex = ", currentIndex);
+    console.log("listObj = ", listObj);
+    currentValue.innerHTML+= "<div class=\"popup\" style=\"display: none\">number</div>";
+  })
+  e.onmouseover = function() {
+    console.log("e = ", e);
+    console.log("e2 = ", e.querySelectorAll('popup'));
+    console.log("e2 = ", e.getElementsByClassName('popup'));
+    e.getElementsByClassName('popup').style.display = 'block';
+  }
+  // var element = document.querySelector(".min");
+  // console.log('element: ', element.textContent);
+  // element.onmouseover(function(event){
+    
+  // })
+
+
+
 
   // Add variable for state layer that colors based on percentage of total funding each state gets
   var percentTotal = L.geoJson(stateData, {
@@ -311,9 +354,8 @@ d3.json(stateLink, function(stateData) {
         else if  (eventLayer.name === 'Percent of Total Funding') {
           map.removeControl(legend1);
           legend2.addTo(map);
-          // map.removeControl(percentFunded);
-          // map.removeLayer(percentFunded);
           weatherEvents.bringToFront();
+          // add event listener for legend2
         }
       });
     })
