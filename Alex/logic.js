@@ -146,7 +146,7 @@ d3.json(stateLink, function(stateData) {
     var div = L.DomUtil.create("div", "info legend");
     
     // array listing out values that divide color categories (changed to ascending order)
-    var limits = ["<70", 70, 75, 80, 85, 90, "95+"];
+    var limits = ["<70", "70", "75", "80", "85", "90", "95+"];
     var colors = ["red", "OrangeRed", "orange", "yellow", "GreenYellow", "green", "DarkGreen"];
     var labels = [];
 
@@ -207,8 +207,8 @@ d3.json(stateLink, function(stateData) {
   e.onmouseover = function() {
     console.log("e = ", e);
     console.log("e2 = ", e.querySelectorAll('popup'));
-    console.log("e2 = ", e.getElementsByClassName('popup'));
-    e.getElementsByClassName('popup').style.display = 'block';
+    console.log("e3 = ", e.getElementsByClassName('popup')[0].style.display);
+    e.getElementsByClassName('popup')[0].style.display = 'block';
   }
   // var element = document.querySelector(".min");
   // console.log('element: ', element.textContent);
