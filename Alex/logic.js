@@ -14,7 +14,8 @@ var streetMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
 
 // because this is a http link and not https, need to disable chrome web security with allow-control-allow-origin plugin
 // https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related?hl=en
-var stateLink = "http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_20m.json";
+// var stateLink = "http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_20m.json";
+var statePath = "US_states_geojson.json"
 var weatherLink = "https://api.weather.gov/alerts/active"
 var csvPath = "data/state_funded.csv"
 
@@ -100,7 +101,7 @@ var getText2 = function(state, feat){
 }
 
 // Grabbing GeoJSON data for state borders
-d3.json(stateLink, function(stateData) {
+d3.json(statePath, function(stateData) {
   console.log("state data = ", stateData);
   //making a callback within a callback to get the state funded data
   d3.csv(csvPath, function(fundingData) {
