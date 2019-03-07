@@ -1,5 +1,6 @@
 // Creating map object
 var map = L.map("map", {
+  // center map right over United States
   center:[37.09, -95.71], 
   zoom: 4
 });
