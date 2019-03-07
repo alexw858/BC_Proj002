@@ -14,8 +14,9 @@ var streetMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
 
 // because this is a http link and not https, need to disable chrome web security with allow-control-allow-origin plugin
 // https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related?hl=en
+// original url for US states geojson:
 // var stateLink = "http://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_20m.json";
-var statePath = "US_states_geojson.json"
+var statePath = "data/US_states_geojson.json"
 var weatherLink = "https://api.weather.gov/alerts/active"
 var csvPath = "data/state_funded.csv"
 
